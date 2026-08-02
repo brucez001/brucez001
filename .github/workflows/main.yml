@@ -3,9 +3,9 @@
 name: grid snake
 
 on:
-  # run automatically every 100 hours
-  # schedule:
-    # - cron: "0 */100 * * *" 
+  # run automatically on the first day of every month at 03:17 UTC
+  schedule:
+    - cron: "17 3 1 * *"
   
   # allows to manually run the job at any time
   workflow_dispatch:
@@ -21,8 +21,15 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: write
     
     steps:
+      - name: check out the main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
       # generates a snake game from a github user (<github_user_name>) contributions graph, output a svg animation at <svg_out_path>
       - name: generate github-contribution-grid-snake.svg
         uses: Platane/snk/svg-only@v2
@@ -31,6 +38,21 @@ jobs:
           outputs: |
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+            assets/github-contribution-grid-snake.svg
+            assets/github-contribution-grid-snake-dark.svg?palette=github-dark
+
+      - name: update snake assets on the main branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/github-contribution-grid-snake.svg assets/github-contribution-grid-snake-dark.svg
+          if git diff --cached --quiet; then
+            echo "Snake assets are already up to date."
+            exit 0
+          fi
+          git commit -m "chore: update contribution snake"
+          git push origin HEAD:main
+
       # push the content of <build_dir> to a branch
       # the content will be available at https://raw.githubusercontent.com/<github_user>/<repository>/<target_branch>/<file> , or as github page
       - name: push github-contribution-grid-snake.svg to the output branch
