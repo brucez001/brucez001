@@ -7,7 +7,7 @@ My name is Bruce(Yicong) Zhu, a software developer, passionate about building pr
 - 👀 Interests: Badminton🏸, Guitar🎸
 
 
-[![Anurag's GitHub stats](https://github-stats-extended.vercel.app/api?username=brucez001&count_private=true&theme=react&show_icons=true&hide=issues,stars)](https://github.com/anuraghazra/github-readme-stats)
+[![Bruce Zhu's GitHub stats](https://github-stats-extended.vercel.app/api?username=brucez001&include_all_commits=true&theme=react&show_icons=true&hide=issues,stars)](https://github.com/brucez001)
 
 [![Top Langs](https://github-stats-extended.vercel.app/api/top-langs/?username=brucez001&langs_count=8&layout=compact&theme=react)](https://github.com/anuraghazra/github-readme-stats)
 
